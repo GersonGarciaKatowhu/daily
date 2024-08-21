@@ -25,5 +25,16 @@ export const useTaskStore = create(set => ({
         }
         return task
       })})
-  )
+  ),
+  editTask: (id, nameTask) => set(state => ({
+    tasks: state.tasks.map(task => {
+      if(task.id === id) {
+        return {
+          nameTask,
+          id
+        }
+      }
+      return task
+    })
+  }))
 }))
