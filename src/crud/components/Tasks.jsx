@@ -1,6 +1,6 @@
 import { useTaskStore } from '../store/useTaskStore'
 function Tasks() {
-  const { tasks, deleteTask } = useTaskStore()
+  const { tasks, deleteTask, toggleTask } = useTaskStore()
   return (
     <ul>
       {tasks.map((task) => (
@@ -8,7 +8,7 @@ function Tasks() {
           {task.nameTask}
           <button onClick={() => deleteTask(task.id)}>Eliminar</button>
           <button>Editar</button>
-          <button>{task.completed ? 'Completado' : 'Pendiente'}</button>
+          <button onClick={() => toggleTask(task.id)}>{task.completed ? 'Completado' : 'Pendiente'}</button>
         </li>
       ))}
     </ul>

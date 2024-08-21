@@ -15,4 +15,15 @@ export const useTaskStore = create(set => ({
       tasks: state.tasks.filter(task => task.id !== id)
     }
   )),
+  toggleTask: id => set(state =>({
+      tasks: state.tasks.map(task => {
+        if(task.id === id) {
+          return {
+            ...task,
+            completed: !task.completed
+          }
+        }
+        return task
+      })})
+  )
 }))
