@@ -36,5 +36,8 @@ export const useTaskStore = create(set => ({
       }
       return task
     })
+  })),
+  deleteAll: () => set(state => ({
+    tasks: []
   }))
 }))

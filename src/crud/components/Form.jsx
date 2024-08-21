@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { useTaskStore } from "../store/useTaskStore"
 import Error from "./Error"
-
+import Add from "../../components/icons/Add"
+import './Form.css'
 function Form() {
   const [nameTask, setNameTask] = useState('')
   const [error, setError] = useState('')
@@ -28,11 +29,13 @@ function Form() {
     setError('')
   }
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       {error && <div>{<Error error={error}/>}</div>}
+    <form onSubmit={handleSubmit}>
       <input type="text" value={nameTask} onChange={(event) => setNameTask(event.target.value)}/>
-      <button>Enviar</button>
+      <button><Add /></button>
     </form>
+    </div>
   )
 }
 

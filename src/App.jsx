@@ -1,12 +1,17 @@
 import './App.css'
+import Footer from './components/Footer'
+import Header from './components/Header'
 import Appcrud from './crud/Appcrud'
+import AppNotes from './notes/AppNotes'
 function App() {
 
   return (
-    <>
-    <h1>App</h1>
+    <div className="App">
+    <Header />
     <Appcrud />
-    </>
+    <AppNotes />
+    <Footer />
+    </div>
   )
 }
 

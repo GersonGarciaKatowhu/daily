@@ -1,26 +1,32 @@
+import './Tasks.css'
 import { useState } from 'react'
 import { useTaskStore } from '../store/useTaskStore'
 import Modal from './Modal'
+import Delete from '../../components/icons/delete'
+import Edit from '../../components/icons/Edit'
+import Completed from '../../components/icons/Completed'
+import Incomplete from '../../components/icons/Incomplete'
+import Hand from '../../components/icons/Hand'
 function Tasks() {
-  const { tasks, deleteTask, toggleTask } = useTaskStore()
+  const { tasks, deleteTask, toggleTask, deleteAll } = useTaskStore()
   const [isEditing, setIsEditing] = useState(false)
   const [editTask, setEditTask] = useState({})
   function handleEdit(task) {
-    console.log('Editando...')
-    console.log(task)
     setIsEditing(true)
     setEditTask(task)
   }
   return (
     <div>
-
+      <div>
+        <button onClick={deleteAll}><Hand /></button>
+      </div>
     <ul>
       {tasks.map((task) => (
-        <li key={task.id}>
-          {task.nameTask}
-          <button onClick={() => deleteTask(task.id)}>Eliminar</button>
-          <button onClick={() => handleEdit(task)}>Editar</button>
-          <button onClick={() => toggleTask(task.id)}>{task.completed ? 'Completado' : 'Pendiente'}</button>
+        <li className='task' key={task.id}>
+          <p className='task-name'>{task.nameTask}</p>
+          <button onClick={() => deleteTask(task.id)}><Delete /></button>
+          <button onClick={() => handleEdit(task)}><Edit /></button>
+          <button onClick={() => toggleTask(task.id)}>{task.completed ? <Completed /> : <Incomplete />}</button>
         </li>
       ))}
     </ul>

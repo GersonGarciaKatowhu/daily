@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useTaskStore } from "../store/useTaskStore";
+import './Modal.css';
 import Error from "./Error";
+
 
 function Modal({ editTask, setIsEditing }) {
   const [taskName, setTaskName] = useState(editTask.nameTask || '');
@@ -23,14 +25,14 @@ function Modal({ editTask, setIsEditing }) {
   return (
     <div className="modal">
       {error && <p>{<Error error={error}/>}</p>}
-      <h2>Editar Tarea</h2>
       <input
         type="text"
         value={taskName}
         onChange={(e) => setTaskName(e.target.value)}
-      />
-      <button onClick={handleSave}>Guardar</button>
-      <button onClick={handleCancel}>Cancelar</button>
+        autoFocus
+        />
+      <button className="btn-save" onClick={handleSave}>Guardar</button>
+      <button className="btn-cancel" onClick={handleCancel}>Cancelar</button>
     </div>
   );
 }

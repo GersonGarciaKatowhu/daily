@@ -2,7 +2,7 @@
 
 function Error({ error }) {
   return (
-    <p>
+    <p className="error">
       {error}
     </p>
   )
