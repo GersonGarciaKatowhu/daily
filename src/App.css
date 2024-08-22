@@ -50,6 +50,7 @@ li {
   grid-template-areas:
   "header header"
   "AppNotes Appcrud"
+  "AppTimer AppTimer"
   "Footer Footer";
 }
 @media (max-width: 600px) {
@@ -59,7 +60,9 @@ li {
     "header"
     "Appcrud"
     "AppNotes"
-    "Footer";
+    "AppTimer"
+    "Footer"
+    ;
   }
 }
 header {
