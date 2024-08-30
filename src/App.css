@@ -12,7 +12,8 @@ button {
 }
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+  background: rgb(41,40,148);
+  background: linear-gradient(90deg, rgba(41,40,148,1) 0%, rgba(255,0,0,1) 100%);
 }
 input {
   padding: 5px 10px;
@@ -49,7 +50,7 @@ li {
   height: 100vh;
   grid-template-areas:
   "header header"
-  "AppNotes Appcrud"
+  "Appcrud AppNotes"
   "AppTimer AppTimer"
   "Footer Footer";
 }
@@ -71,4 +72,9 @@ header {
 }
 footer {
   grid-area: Footer;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
