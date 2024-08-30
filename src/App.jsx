@@ -3,7 +3,6 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import Appcrud from './crud/Appcrud'
 
-import AppNotes from './notes/AppNotes'
 import AppTimer from './timer/AppTimer'
 function App() {
 
@@ -11,7 +10,6 @@ function App() {
     <div className="App">
     <Header />
     <Appcrud />
-    <AppNotes />
     <Footer />
     <AppTimer />
     </div>
