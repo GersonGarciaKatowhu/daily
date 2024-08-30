@@ -1,10 +1,11 @@
 
 import './CircularProgressBar.css';
 // eslint-disable-next-line react/prop-types
-const CircularProgressBar = ({ percentage, radius = 50, strokeWidth = 10 }) => {
+const CircularProgressBar = ({percentage, time, radius = 60, strokeWidth = 10 }) => {
   const normalizedRadius = radius - strokeWidth * 0.5;
   const circumference = normalizedRadius * 2 * Math.PI;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
+  const timeFormatted = `${time.minutes}:${time.seconds}${time.seconds < 10 ? "0" : ""}`
 
   return (
     <svg height={radius * 2} width={radius * 2}>
@@ -17,7 +18,7 @@ const CircularProgressBar = ({ percentage, radius = 50, strokeWidth = 10 }) => {
         cy={radius}
       />
       <circle
-        stroke="blue"
+        stroke="green"
         fill="transparent"
         strokeWidth={strokeWidth}
         strokeDasharray={circumference + ' ' + circumference}
@@ -35,7 +36,7 @@ const CircularProgressBar = ({ percentage, radius = 50, strokeWidth = 10 }) => {
         textAnchor="middle"
         fontSize="1.5em"
       >
-        {`${percentage}%`}
+        {timeFormatted}
       </text>
     </svg>
   );

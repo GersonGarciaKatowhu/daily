@@ -2,19 +2,48 @@ import { useEffect, useState } from "react"
 import "./AppTimer.css"
 import CircularProgressBar from "./components/CircularProgressBar"
 
-const typeOfPercentaje = {
-  restLong : 15,
-  restShort : 5,
-  work : 35
-}
 
 function AppTimer() {
-  const [seconds, setSeconds] = useState(0)
-  const [minutes, setMinutes] = useState(25)
+  const [timeDefault, setTimeDefault] = useState({
+    minutes: 25,
+    seconds: 0
+  })
+  const [seconds, setSeconds] = useState(timeDefault.seconds)
+  const [minutes, setMinutes] = useState(timeDefault.minutes)
+  const [percentage, setPercentage] = useState(0)
   const [isRunning, setIsRunning] = useState(false)
-  function handleRestart() {
+
+  function handleWork() { 
+    setTimeDefault({
+      minutes: 25,
+      seconds: 0
+    })
     setMinutes(25)
     setSeconds(0)
+    setIsRunning(true)
+  }
+
+  function handleRestLong() {
+    setTimeDefault({
+      minutes: 15,
+      seconds: 0
+    })
+    setMinutes(15)
+    setSeconds(0)
+    setIsRunning(true)
+  }
+  function handleRestShort() {
+    setTimeDefault({
+      minutes: 5,
+      seconds: 0
+    })
+    setMinutes(5)
+    setSeconds(0)
+    setIsRunning(true)
+  }
+  function handleRestart() {
+    setMinutes(timeDefault.minutes)
+    setSeconds(timeDefault.seconds)
     setIsRunning(true)
   }
 
@@ -27,20 +56,32 @@ function AppTimer() {
       if(seconds === 0) {
         setMinutes((prevMinutes) => prevMinutes - 1)
         setSeconds(59)
+      } else {
+        setSeconds((prevTime) => prevTime - 1)
       }
-      setSeconds((prevTime) => prevTime - 1)
     }, 1000)
     return () => clearInterval(interval)
   }, [minutes, seconds, isRunning])
+  useEffect(() => {
+    function calculatePercentage() {
+      const percentage = ((minutes * 60) + seconds) / ((timeDefault.minutes * 60) + timeDefault.seconds) * 100
+      const roundedPercentage = Math.round(percentage)
+      setPercentage(roundedPercentage)
+    }
+    calculatePercentage()
+  }, [minutes, seconds, timeDefault.minutes, timeDefault.seconds])
   return (
     <div className="AppTimer">
-      <h2 className="pomodoro-title">Pomodoro Timer</h2>
       <div className="timer">
-        <p>{minutes}:{seconds}{seconds < 10 ? "0" : ""}</p>
+        <nav>
+        <button onClick={() => handleWork()}>Pomodoro</button>
+        <button onClick={() => handleRestLong()}>Descanso Largo</button>
+        <button onClick={() => handleRestShort()}>Descanso Corto</button>
+        </nav>
         <button onClick={() => handleRestart()}>Reiniciar tiempo</button>
         <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? "Pausar" : "Iniciar"}</button>
         <div className="center">
-        <CircularProgressBar percentage={50} />
+        <CircularProgressBar percentage={percentage} time={ {minutes, seconds}} />
         </div>
       </div>
     </div>
